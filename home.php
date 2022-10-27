@@ -16,11 +16,7 @@ if(!$rezultat){
     die();
 }
 
-if($rezultat->num_rows==0){
-    echo "Nema prijava na kolokvijume";
-    die();
-}
-else{
+
 
 ?>
 <!DOCTYPE html>
@@ -58,7 +54,13 @@ else{
 </div>
 
 <div id="pregled" class="panel panel-success" style="margin-top: 1%;">
-    
+    <?php
+    if($rezultat->num_rows==0){
+        echo "Nema prijava na kolokvijume";
+        // die();
+    }
+    else{
+    ?>
     <div class="panel-body">
         <table id="myTable" class="table table-hover table-striped" style="color: black; background-color: grey;" >
             <thead class ="thead">
@@ -72,9 +74,11 @@ else{
             <tbody>
             <?php 
                 while($red=$rezultat->fetch_array()):
+                    // while($red=$rezultat->fetch_object()):
             ?>
                 <tr>
                     <td><?php echo $red["predmet"] ?></td>
+                    <!-- <td><?php // echo $red->predmet;?></td> -->
                     <td><?php echo $red["katedra"] ?></td>
                     <td><?php echo $red["sala"] ?></td>
                     <td><?php echo $red["datum"] ?></td>
@@ -87,9 +91,7 @@ else{
 
                 </tr>
                 <?php
-                endwhile;
-
-            } //zatvaranje else-a
+                endwhile;           
                 ?>
 
             </tbody>
@@ -109,6 +111,7 @@ else{
                 </div>
 
         </div>
+        <?php }// zatvaranje else-a?>
     </div>
 </div>
 
@@ -129,7 +132,7 @@ else{
                             <div class="col-md-11 ">
                                 <div class="form-group">
                                     <label for="">Predmet</label>
-                                    <input type="text" style="border: 1px solid black" name="predmet" class="form-control"/>
+                                    <input type="text" style="border: 1px solid black" name="predmet_d" class="form-control"/>
                                 </div>
                                 <div class="form-group">
                                 <label for="">Katedra</label>
