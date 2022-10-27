@@ -35,6 +35,24 @@ $('#dodajForm').submit(function(){
 
 });
 
+$("#btn-obrisi").click(function(){
+    const checked = $("input[type=radio]:checked");
+    console.log(checked);
+    request = $.ajax({
+        url:"handler/delete.php",
+        type:"post",
+        data:{"prijavaID":checked.val()}
+    });
+    request.done(function(response){
+        if(response==="Success"){
+            checked.closest("tr").remove();
+            alert("Prijava je obrisana");
+        }else{
+            alert("Prijava nije obrisana! "+response);
+        }
+    });
+});
+
 function appendRow(row){
     $.get("handler/getLast.php", function(data){
         console.log(data);
